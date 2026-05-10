@@ -1,6 +1,5 @@
 
 import './App.css'
-import Employee from './components/Employee'
 import EmployeesList from './components/EmployeesList'
 import Footer from './components/Footer'
 import Header from './components/Header'
@@ -24,15 +23,8 @@ function App() {
           <Route 
             path='/employees' 
             element={<EmployeesList />}
-          >  
+          >
           </Route>
-
-          {/* {// http://localhost:3000/add-employee} */}
-          <Route path='/add-employee' element= { <Employee/> }></Route>
-
-          {/* {// http://localhost:3000/edit-employee/{id}} */}
-          <Route path='/edit-employee/:id'
-          element= {<Employee/>}></Route>
         </Routes>
         <Footer />
       </BrowserRouter>
