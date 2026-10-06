@@ -42,18 +42,19 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeDTO updateEmployee(Long employeeId, EmployeeDTO updatedEmployee) {
 
         Employee employee = employeeRepository.findById(employeeId).orElseThrow(
-                () -> new ResourceNotFoundException("The given id does not match any existing employee."
-                )
+                () -> new ResourceNotFoundException("The given id does not match any existing employee.")
         );
 
         employee.setFirstName(updatedEmployee.getFirstName());
         employee.setLastName(updatedEmployee.getLastName());
         employee.setEmail(updatedEmployee.getEmail());
+        employee.setPosition(updatedEmployee.getPosition());
+        employee.setHireDate(updatedEmployee.getHireDate());
+        employee.setSalary(updatedEmployee.getSalary());
 
         Employee updatedEmployeeObj = employeeRepository.save(employee); //save() : both insert(if doesn't exist) and update(if exists) operations.
 
         return EmployeeMapper.mapToEmployeeDto(updatedEmployeeObj);
-
     }
 
     @Override

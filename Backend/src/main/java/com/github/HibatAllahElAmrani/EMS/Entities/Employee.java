@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "employees")
 @Getter
@@ -27,4 +30,13 @@ public class Employee {
 
     @Column(name = "email", nullable = false, unique = true, length = 100) // The unique = true attribute tells JPA to add a unique constraint on that column at the database level, meaning the DB will reject any attempt to insert two rows with the same email address
     private String email;
+
+    @Column(name = "position")
+    private String position;
+
+    @Column(name = "hire_date")
+    private LocalDate hireDate;
+
+    @Column(name = "salary")
+    private BigDecimal salary;
 }
