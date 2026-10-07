@@ -1,62 +1,309 @@
-body::before {
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Prata&display=swap');
+
+/* Palette
+   cream #FFF7E6  page        pink #F7C8D3  accents, hard shadows
+   rose  #B46A72  secondary   sage #A8B58A  primary actions
+   mist  #A9B7C6  focus       ink  #2D3A47  text, form card, footer
+*/
+:root {
+  --cream: #FFF7E6;
+  --pink: #F7C8D3;
+  --rose: #B46A72;
+  --rose-deep: #8F4D56;
+  --sage: #A8B58A;
+  --sage-deep: #94A276;
+  --mist: #A9B7C6;
+  --ink: #2D3A47;
+
+  /* To swap fonts, change only these two lines (and the @import above):
+     'Libre Caslon Text' for display, 'Raleway' for body. */
+  --font-display: 'Prata', Georgia, serif;
+  --font-body: 'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+/* ---------- Page ---------- */
+body {
+  background-color: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Flat geometric shapes replace the blurred photo */
+body::before,
+body::after {
   content: '';
   position: fixed;
-  inset: 0; 
-  background-image: url('./assets/bg.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  filter: blur(4px);
+  border-radius: 50%;
   z-index: -1;
+  pointer-events: none;
+}
+body::before {
+  width: 55vmin;
+  height: 55vmin;
+  top: -18vmin;
+  right: -14vmin;
+  background: var(--pink);
+}
+body::after {
+  width: 40vmin;
+  height: 40vmin;
+  bottom: -14vmin;
+  left: -10vmin;
+  background: var(--sage);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 400; /* Prata only has one weight, so don't let the browser fake bold */
+  letter-spacing: 0;
+  color: var(--ink);
 }
 
 .employees-title {
-  font-size: 2.7rem;
-  margin-bottom: 20px;
+  display: inline-block;
+  font-size: 3.4rem;
+  line-height: 1.1;
+  margin-bottom: 28px;
+  box-shadow: inset 0 -0.32em 0 var(--pink); /* pink band behind the lower part of the title */
 }
-table{
-  border-collapse: separate; /* ← needed for border-radius to work */
-  border-spacing: 0;
-  border-radius: 10px;
-  overflow: hidden;          /* ← clips the corners cleanly */
-}
-header, nav {
+
+/* ---------- Header ---------- */
+header,
+nav {
   width: 100% !important;
 }
 
-.footer{
+header,
+.navbar {
+  background-color: var(--cream) !important;
+  border-bottom: 2px solid var(--ink);
+  padding-top: 0.9rem;
+  padding-bottom: 0.9rem;
+}
+
+.navbar-brand,
+header a,
+header h1,
+.navbar a {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 400;
+  color: var(--ink) !important;
+  text-decoration: none;
+}
+
+/* ---------- Table: each row is its own floating pill ---------- */
+table {
+  border-collapse: separate;
+  border-spacing: 0 12px;
+  background: transparent;
+}
+
+.table {
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--ink);
+  --bs-table-striped-bg: transparent;
+  --bs-table-hover-bg: transparent;
+  --bs-table-border-color: transparent;
+  margin-bottom: 0;
+}
+
+.table > thead > tr > th {
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 0.9rem;
+  padding: 0 1.1rem 0.2rem;
+}
+
+.table > tbody > tr > td {
+  background-color: rgba(255, 255, 255, 0.85);
+  box-shadow: none;
+  border: none;
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+  padding: 1rem 1.1rem;
+  vertical-align: middle;
+}
+.table > tbody > tr > td:first-child {
+  border-left: 2px solid var(--ink);
+  border-radius: 16px 0 0 16px;
+  font-weight: 700;
+}
+.table > tbody > tr > td:last-child {
+  border-right: 2px solid var(--ink);
+  border-radius: 0 16px 16px 0;
+}
+
+.table > tbody > tr:hover > td {
+  background-color: var(--pink);
+}
+
+/* ---------- Form card: dark slab with a hard pink shadow ---------- */
+.card {
+  background-color: var(--ink);
+  color: var(--cream);
+  border: 2px solid var(--ink);
+  border-radius: 22px;
+  box-shadow: 12px 12px 0 var(--pink);
+}
+
+.card h2 {
+  color: var(--cream);
+  font-size: 2.2rem;
+}
+
+.card .card-body {
+  padding: 1.8rem 2rem 2.2rem;
+}
+
+.form-label {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--cream);
+}
+
+.form-control {
+  background-color: var(--cream);
+  border: 2px solid var(--cream);
+  border-radius: 12px;
+  color: var(--ink);
+  font-family: var(--font-body);
+  padding: 0.6rem 0.9rem;
+}
+
+.form-control::placeholder {
+  color: #6b7886;
+}
+
+.form-control:focus {
+  background-color: #ffffff;
+  border-color: var(--mist);
+  box-shadow: 0 0 0 0.25rem rgba(169, 183, 198, 0.55);
+  color: var(--ink);
+}
+
+.form-control.is-invalid {
+  border-color: var(--pink);
+  background-image: none;
+}
+
+.form-control.is-invalid:focus {
+  box-shadow: 0 0 0 0.25rem rgba(247, 200, 211, 0.45);
+}
+
+.invalid-feedback {
+  color: var(--pink); /* pink on ink passes contrast; rose would not */
+  font-weight: 600;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  font-family: var(--font-body);
+  font-weight: 700;
+  border-radius: 40px;
+  transition: transform 0.12s ease, background-color 0.12s ease;
+}
+.btn:hover {
+  transform: translateY(-2px);
+}
+.btn:focus-visible {
+  outline: 3px solid var(--mist);
+  outline-offset: 3px;
+}
+
+/* Submit on the dark form card */
+.btn-success {
+  background-color: var(--pink);
+  border: 2px solid var(--pink);
+  color: var(--ink);
+  padding: 0.55rem 1.8rem;
+  margin-top: 0.8rem;
+}
+.btn-success:hover,
+.btn-success:focus {
+  background-color: var(--sage);
+  border-color: var(--sage);
+  color: var(--ink);
+}
+
+/* "Add employee" and other primary buttons */
+.btn-primary {
+  background-color: var(--ink);
+  border: 2px solid var(--ink);
+  color: var(--cream);
+}
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--rose-deep);
+  border-color: var(--rose-deep);
+  color: var(--cream);
+}
+
+/* Update */
+.btn-custom {
+  background-color: var(--sage);
+  border-radius: 20px;
+  border: 2px solid var(--ink);
+  color: var(--ink);
+  margin-left: 10px;
+}
+.btn-custom:hover {
+  background-color: var(--sage-deep);
+  color: var(--ink);
+}
+
+/* Delete: outlined, so it feels weightier to click than Update */
+.btn-custom1 {
+  background-color: transparent;
+  border-radius: 20px;
+  border: 2px solid var(--rose-deep);
+  color: var(--rose-deep);
+  margin-left: 10px;
+}
+.btn-custom1:hover {
+  background-color: var(--rose-deep);
+  border-color: var(--rose-deep);
+  color: var(--cream);
+}
+
+.btn-dark {
+  background-color: var(--ink);
+  border: 2px solid var(--ink);
+  color: var(--cream);
+}
+.btn-dark:hover,
+.btn-dark:focus {
+  background-color: var(--rose-deep);
+  border-color: var(--rose-deep);
+  color: var(--cream);
+}
+
+/* ---------- Footer ---------- */
+.footer {
   bottom: 0;
   width: 100%;
   height: 50px;
-  background-color: #5082a7;
+  background-color: var(--ink);
   text-align: center;
-  color: black;
-  font-weight: 500;
+  color: var(--cream);
+  font-weight: 600;
   padding-top: 0.65rem;
 }
 
-.btn-custom {
-  background-color: #767F9E;
-  border-color: #767F9E;
-  border-style: solid;
-  color: white;
-  border-radius: 40px;
-  margin-left: 10px
-}
-.btn-custom:hover {
-  background-color: #5f6a85; /* slightly darker for hover effect */
-  border-color: #5f6a85;
+/* ---------- Small screens and motion ---------- */
+@media (max-width: 576px) {
+  .employees-title { font-size: 2.4rem; }
+  .card { box-shadow: 6px 6px 0 var(--pink); }
+  .card .card-body { padding: 1.2rem; }
 }
 
-.btn-custom1 {
-  background-color: #cf4f5a;
-  border-color: #cf4f5a;
-  border-style: solid;
-  color: white;
-  border-radius: 40px;
-  margin-left: 10px
-}
-.btn-custom1:hover {
-  background-color: #a82631; /* slightly darker for hover effect */
-  border-color: #a82631;
+@media (prefers-reduced-motion: reduce) {
+  .btn { transition: none; }
+  .btn:hover { transform: none; }
 }
