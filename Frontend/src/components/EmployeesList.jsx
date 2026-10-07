@@ -53,26 +53,32 @@ function EmployeesList() {
 
       <button className="btn btn-dark mb-2
       " onClick={addNewEmployee}> Add Employee </button>
-      <table className="table table-bordered table-striped">
+      <table className="table">
         <thead>
-          <tr className="table-success">
+          <tr>
             <th>Id</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
+            <th>Position</th>
+            <th>Hire Date</th>
+            <th>Salary</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {employees.map((employee) => {
             return (
-              <tr className="table-success" key={employee.id}>
-                <td className="table-secondary">{employee.id}</td>
-                <td className="table-secondary">{employee.firstName}</td>
-                <td className="table-secondary">{employee.lastName}</td>
-                <td className="table-secondary">{employee.email}</td>
+              <tr key={employee.id}>
+                <td>{employee.id}</td>
+                <td>{employee.firstName}</td>
+                <td>{employee.lastName}</td>
+                <td>{employee.email}</td>
+                <td>{employee.position}</td>
+                <td>{employee.hireDate}</td>
+                <td>{employee.salary}</td>
                 <td
-                className="table-secondary">
+                >
                   <button className="btn-custom"
                   onClick={() => updateEmployee(employee.id)}>
                     Update
